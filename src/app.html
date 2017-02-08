@@ -1,0 +1,111 @@
+<template>
+
+  <div> Debug : ${debug} </div>
+  <h1>${heading}</h1>
+
+  <form submit.trigger="addState()">
+    <input type="text" value.bind="stateDescription">
+    <button type="submit">Add State</button>
+  </form>
+
+
+  <h1> ${Transitions} </h1>
+  <form submit.trigger="addTransition()">
+    <input type="text" value.bind="transitionSource"> 
+    <input type="text" value.bind="transitionSymbole">
+    <input type="text" value.bind="transitionTarget">
+    <button type="submit">Add Transition</button>
+  </form>
+
+
+
+<form submit.trigger = "dfa_conversion()">
+
+
+<ul>
+    <li repeat.for="state of states">
+      <span >
+       <input type = "radio" name ="start" value.bind = "stateStart">
+
+        <input type="checkbox" name ="accept" value = "${state.description}">
+
+         ${state.description}
+      </span>
+      <button click.trigger="removeState(state)">Remove</button>
+    </li>    
+</ul>
+
+
+  <ul>
+    <li repeat.for="transition of transitions">
+      
+      Source : <span> ${transition.source} </span>
+      
+      Symbole : <span> ${transition.symbole} </span>
+      
+      Target : <span> ${transition.target} </span>
+
+      <button click.trigger="removeTransition(transition)">Remove</button>
+    </li>    
+  </ul>
+
+  	<button type ="submit"> Conversion </button>
+
+  </form>    
+
+
+
+<h3> L'automate non déterministe :</h3>
+  <ul>
+
+
+  	<li> Start : ${start.description} </li>
+    <li repeat.for="accept of accepts"> Accept : ${accept.description} </li>
+    <li> Liste des symboles :
+    <span repeat.for="symbol of symbols"> ${symbol} </span> 
+
+    </li>
+  </ul>
+
+
+<h3> L'automate déterministe :  </h3>
+
+      <h5> Les états : </h5>
+      <ul>
+          <li repeat.for="state of Q"> ${state.description} </li>
+      </ul>
+
+
+      <h5> Les transitions </h5>
+      <ul>
+          <li repeat.for="transition of deter_transition"> 
+            
+              Source : <span> ${transition.source} </span>
+      
+              Symbole : <span> ${transition.symbole} </span>
+              
+              Target : <span> ${transition.target} </span>
+
+
+           </li>
+      </ul>
+
+
+      <!-- 
+
+      Testing : 
+      <ul>
+          Test 1 : <li repeat.for="testing of test"> ${testing} </li>
+         Test 2<ul> <li repeat.for="testing2 of test2"> ${testing2}</li> </ul>
+         Test 3 <ul> <li repeat.for="testing3 of test3"> ${testing3} </li> <ul> 
+          Gamma  <ul> <li repeat.for="g of gamma"> ${g} </li> <ul> 
+      </ul>
+
+      -->
+
+
+<br/>
+<div> Checkbox : for the "Accept" states </div>
+<div> Radio : for the "Start" state  </div>
+
+</template>
